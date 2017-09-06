@@ -1,6 +1,15 @@
 ![](http://i.imgur.com/wYi2CkD.png)
 
 
+This fork of the spider project logs linked networks and outputs a CSV file which can then be imported into a graphing package of your choice.
+
+Enter start URL and project name in projectData.py, then run main.py. After completion, run fileFormats.py to create the CSV files.
+
+
+
+# Original readme:
+
+
 # Overview
 
 This is an open source, multi-threaded website crawler written in Python. There is still a lot of work to do, so feel free to help out with development.
