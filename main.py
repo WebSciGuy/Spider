@@ -3,27 +3,26 @@ from queue import Queue
 from spider import Spider
 from domain import *
 from general import *
+from projectData import *
 
-PROJECT_NAME = 'viper-seo'
-HOMEPAGE = 'http://viper-seo.com/'
-DOMAIN_NAME = get_domain_name(HOMEPAGE)
+DOMAIN_NAME = get_domain_name(START_PAGE)
 QUEUE_FILE = PROJECT_NAME + '/queue.txt'
 CRAWLED_FILE = PROJECT_NAME + '/crawled.txt'
-NUMBER_OF_THREADS = 8
+NUMBER_OF_THREADS = 32
 queue = Queue()
-Spider(PROJECT_NAME, HOMEPAGE, DOMAIN_NAME)
+Spider(PROJECT_NAME, START_PAGE, DOMAIN_NAME)
 
 
-# Create worker threads (will die when main exits)
+# Create task threads (will stop when main exits)
 def create_workers():
     for _ in range(NUMBER_OF_THREADS):
-        t = threading.Thread(target=work)
+        t = threading.Thread(target=task)
         t.daemon = True
         t.start()
 
 
 # Do the next job in the queue
-def work():
+def task():
     while True:
         url = queue.get()
         Spider.crawl_page(threading.current_thread().name, url)

@@ -1,18 +1,14 @@
 from urllib.parse import urlparse
 
 
-# Get domain name (example.com)
+# Extract the domain, but also allow for .co.uk and other formats.
 def get_domain_name(url):
     try:
-        results = get_sub_domain_name(url).split('.')
-        return results[-2] + '.' + results[-1]
+        parsed_uri = urlparse(url)
+        domain = '{uri.scheme}://{uri.netloc}/'.format(uri=parsed_uri)
+        return domain
     except:
         return ''
 
-
-# Get sub domain name (name.example.com)
-def get_sub_domain_name(url):
-    try:
-        return urlparse(url).netloc
-    except:
-        return ''
+#  code to test script
+# print(get_domain_name('https://sussed.soton.ac.uk/cp/home/displaylogin'))

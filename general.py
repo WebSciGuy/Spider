@@ -1,7 +1,8 @@
 import os
+from projectData import *
 
 
-# Each website is a separate project (folder)
+# Each dominant topic group is a separate project (folder)
 def create_project_dir(directory):
     if not os.path.exists(directory):
         print('Creating directory ' + directory)
@@ -11,11 +12,14 @@ def create_project_dir(directory):
 # Create queue and crawled files (if not created)
 def create_data_files(project_name, base_url):
     queue = os.path.join(project_name , 'queue.txt')
-    crawled = os.path.join(project_name,"crawled.txt")
+    crawled = os.path.join(project_name,'crawled.txt')
+    pairs = os.path.join(project_name, (PROJECT_NAME + '.txt'))
     if not os.path.isfile(queue):
         write_file(queue, base_url)
     if not os.path.isfile(crawled):
         write_file(crawled, '')
+    if not os.path.isfile(pairs):
+        write_file(pairs, '')
 
 
 # Create a new file
